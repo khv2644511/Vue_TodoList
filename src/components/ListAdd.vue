@@ -14,8 +14,8 @@
         </v-col>
         <v-row class="justify-end">
           <v-col cols="7"
-            ><v-btn @click="addList">리스트 추가</v-btn>
-            <v-btn @click="listEdit">리스트 수정</v-btn>
+            ><v-btn v-if="mode === 'add'" @click="addList">리스트 추가</v-btn>
+            <v-btn v-else @click="listEdit">리스트 수정</v-btn>
           </v-col></v-row
         >
       </v-row>
@@ -30,12 +30,14 @@
       return {
         memo: null,
         index: null,
+        mode: "add",
       };
     },
     created() {
       eventBus.$on("listEdit", (memo, index) => {
         this.memo = memo;
         this.index = index;
+        this.mode = "edit";
       });
     },
     methods: {
@@ -53,6 +55,7 @@
         } else {
           this.$emit("listEdit", this.memo, this.index);
           this.memo = null;
+          this.mode = "add";
         }
       },
     },
