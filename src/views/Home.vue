@@ -1,7 +1,12 @@
 <template>
   <v-container gutter="20px">
     <v-row>
-      <v-col><List :todoList="todoList" @statusChange="statusChange" /></v-col>
+      <v-col
+        ><List
+          :todoList="todoList"
+          @statusChange="statusChange"
+          @listDelete="listDelete"
+      /></v-col>
       <v-col><ListAdd @addList="addList" /></v-col>
     </v-row>
   </v-container>
@@ -27,6 +32,9 @@
       statusChange(index, status) {
         console.log(index, status);
         this.todoList[index].status = status;
+      },
+      listDelete(index) {
+        this.todoList.splice(index, 1);
       },
     },
   };

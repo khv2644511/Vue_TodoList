@@ -27,7 +27,7 @@
         color="blue"
         ><v-icon color="blue">mdi-refresh</v-icon></v-btn
       >
-      <v-btn icon fab small color="red"
+      <v-btn @click="$emit('listDelete', index)" icon fab small color="red"
         ><v-icon color="red">mdi-delete</v-icon></v-btn
       >
     </v-card>
