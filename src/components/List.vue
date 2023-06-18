@@ -8,7 +8,6 @@
       :key="index"
     >
       <p class="ma-0">{{ list.memo }}</p>
-      <p class="ma-0">{{ list.status }}</p>
       <v-btn
         v-if="list.status === 'created'"
         @click="$emit('statusChange', index, 'done')"
@@ -30,17 +29,32 @@
       <v-btn @click="$emit('listDelete', index)" icon fab small color="red"
         ><v-icon color="red">mdi-delete</v-icon></v-btn
       >
+      <v-btn
+        v-if="list.status === 'created'"
+        @click="listEdit(list.memo, index)"
+        icon
+        fab
+        small
+        color="yellow"
+        ><v-icon color="yellow">mdi-pencil</v-icon></v-btn
+      >
     </v-card>
   </div>
 </template>
 
 <script>
+  import { eventBus } from "@/main";
   export default {
     data() {
       return {
         memo: null,
         status: null,
       };
+    },
+    methods: {
+      listEdit(memo, index) {
+        eventBus.listEdit(memo, index);
+      },
     },
     props: ["todoList"],
   };

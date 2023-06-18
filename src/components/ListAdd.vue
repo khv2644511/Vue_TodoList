@@ -14,8 +14,9 @@
         </v-col>
         <v-row class="justify-end">
           <v-col cols="7"
-            ><v-btn @click="addList">리스트 추가</v-btn></v-col
-          ></v-row
+            ><v-btn @click="addList">리스트 추가</v-btn>
+            <v-btn @click="listEdit">리스트 수정</v-btn>
+          </v-col></v-row
         >
       </v-row>
     </v-container>
@@ -23,19 +24,35 @@
 </template>
 
 <script>
+  import { eventBus } from "@/main";
   export default {
     data() {
       return {
         memo: null,
+        index: null,
       };
+    },
+    created() {
+      eventBus.$on("listEdit", (memo, index) => {
+        this.memo = memo;
+        this.index = index;
+      });
     },
     methods: {
       addList() {
-        console.log(this.memo);
         if (this.memo === null) {
           alert("할일을 입력해주시요!");
         } else {
           this.$emit("addList", this.memo);
+          this.memo = null;
+        }
+      },
+      listEdit() {
+        if (this.memo === null) {
+          alert("할일을 입력해주시요!");
+        } else {
+          this.$emit("listEdit", this.memo, this.index);
+          this.memo = null;
         }
       },
     },

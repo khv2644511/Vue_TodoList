@@ -7,7 +7,7 @@
           @statusChange="statusChange"
           @listDelete="listDelete"
       /></v-col>
-      <v-col><ListAdd @addList="addList" /></v-col>
+      <v-col><ListAdd @addList="addList" @listEdit="listEdit" /></v-col>
     </v-row>
   </v-container>
 </template>
@@ -35,6 +35,9 @@
       },
       listDelete(index) {
         this.todoList.splice(index, 1);
+      },
+      listEdit(memo, index) {
+        this.todoList[index].memo = memo;
       },
     },
   };
