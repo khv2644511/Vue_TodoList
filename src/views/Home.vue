@@ -1,7 +1,7 @@
 <template>
   <v-container gutter="20px">
     <v-row>
-      <v-col><List :todoList="todoList" /></v-col>
+      <v-col><List :todoList="todoList" @statusChange="statusChange" /></v-col>
       <v-col><ListAdd @addList="addList" /></v-col>
     </v-row>
   </v-container>
@@ -22,8 +22,11 @@
     },
     methods: {
       addList(memo) {
-        console.log("부모 받음");
         this.todoList.push({ memo: memo, status: "created" });
+      },
+      statusChange(index, status) {
+        console.log(index, status);
+        this.todoList[index].status = status;
       },
     },
   };
