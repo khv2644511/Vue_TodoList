@@ -41,7 +41,7 @@
       </v-list>
     </v-navigation-drawer>
     
-    <v-main >
+    <v-main fill-height>
       <router-view></router-view>
     </v-main>
   </v-container>
