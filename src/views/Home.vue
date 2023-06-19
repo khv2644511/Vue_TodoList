@@ -1,5 +1,10 @@
 <template>
   <v-container gutter="20px">
+    <h2>투두 리스트</h2>
+    <p>
+      전체 할일: {{ todoList.length }}/ 완료된 할일: {{ countDone }} / 남은
+      할일: {{ todoList.length - countDone }}
+    </p>
     <v-row>
       <v-col
         ><List
@@ -38,6 +43,15 @@
       },
       listEdit(memo, index) {
         this.todoList[index].memo = memo;
+      },
+    },
+    computed: {
+      countDone() {
+        let count = 0;
+        this.todoList.forEach((list) => {
+          if (list.status === "done") count++;
+        });
+        return count;
       },
     },
   };
