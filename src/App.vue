@@ -1,7 +1,6 @@
 <template>
   <v-app>
-    <v-card
-    height="400"
+    <v-container class="pa-0"
   >
       <v-app-bar
         color="deep-purple"
@@ -42,10 +41,10 @@
       </v-list>
     </v-navigation-drawer>
     
-    <v-content>
+    <v-main >
       <router-view></router-view>
-    </v-content>
-  </v-card>
+    </v-main>
+  </v-container>
   </v-app>
 </template>
 
