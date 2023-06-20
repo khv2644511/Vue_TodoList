@@ -5,6 +5,11 @@
         <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
 
         <v-toolbar-title>Todo</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-btn plain v-if="isLogin"> welcom </v-btn>
+        <v-btn plain v-else router :to="{ name: 'login' }"> Log in </v-btn>
       </v-app-bar>
 
       <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -39,6 +44,7 @@
 
 <script>
   import Home from "./views/Home.vue";
+  import { mapState } from "vuex";
 
   export default {
     name: "App",
@@ -46,6 +52,9 @@
       drawer: false,
       group: null,
     }),
+    computed: {
+      ...mapState(["isLogin"]),
+    },
     components: { Home },
   };
 </script>
