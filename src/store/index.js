@@ -1,3 +1,4 @@
+import router from "@/router";
 import Vue from "vue";
 import Vuex from "vuex";
 
@@ -5,6 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    userInfo: null,
     allUsers: [
       { id: 1, name: "hyebin", email: "khv@naver.com", password: "1234" },
       { id: 2, name: "logo", email: "khv@naver.com", password: "1234" },
@@ -15,9 +17,10 @@ export default new Vuex.Store({
   getters: {},
   mutations: {
     // 로그인 성공 시,
-    loginSuccess(state) {
+    loginSuccess(state, payload) {
       state.isLogin = true;
       state.isLoginError = false;
+      state.userInfo = payload;
     },
     // 로그인 실패 시
     loginError(state) {
@@ -32,9 +35,15 @@ export default new Vuex.Store({
       state.allUsers.forEach((user) => {
         if (user.email === loginObj.email) selectedUser = user;
       });
-      selectedUser === null || selectedUser.password !== loginObj.password
-        ? commit("loginError")
-        : commit("loginSuccess");
+      if (
+        selectedUser === null ||
+        selectedUser.password !== loginObj.password
+      ) {
+        commit("loginError");
+      } else {
+        commit("loginSuccess", selectedUser);
+        router.push({ name: "mypage" });
+      }
     },
   },
   modules: {},
