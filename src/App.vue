@@ -8,8 +8,22 @@
 
         <v-spacer></v-spacer>
 
-        <v-btn plain v-if="isLogin"> welcom </v-btn>
-        <v-btn plain v-else router :to="{ name: 'login' }"> Log in </v-btn>
+        <v-menu offset-y v-if="isLogin">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn text icon v-bind="attrs" v-on="on">
+              <v-icon> mdi-dots-horizontal </v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item router :to="{ name: 'mypage' }">
+              <v-list-item-title>My page</v-list-item-title>
+            </v-list-item>
+            <v-list-item @click="logout">
+              <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-btn v-else plain router :to="{ name: 'login' }"> Log in </v-btn>
       </v-app-bar>
 
       <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -56,7 +70,7 @@
 
 <script>
   import Home from "./views/Home.vue";
-  import { mapState } from "vuex";
+  import { mapState, mapActions } from "vuex";
 
   export default {
     name: "App",
@@ -66,6 +80,9 @@
     }),
     computed: {
       ...mapState(["isLogin"]),
+    },
+    methods: {
+      ...mapActions(["logout"]),
     },
     components: { Home },
   };
