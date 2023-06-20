@@ -4,7 +4,7 @@
       <v-alert width="400px" type="error" :value="isError" dismissible
         >아이디와 비밀번호를 확인해주세요.</v-alert
       >
-      <v-alert type="success" :value="loginSuccess" dismissible
+      <v-alert width="400px" type="success" :value="loginSuccess" dismissible
         >로그인이 완료되었습니다.</v-alert
       >
       <v-col>
