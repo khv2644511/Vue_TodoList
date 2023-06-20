@@ -18,7 +18,7 @@
             <v-list-item router :to="{ name: 'mypage' }">
               <v-list-item-title>My page</v-list-item-title>
             </v-list-item>
-            <v-list-item @click="logout">
+            <v-list-item @click="$store.dispatch('logout')">
               <v-list-item-title>Logout</v-list-item-title>
             </v-list-item>
           </v-list>
@@ -70,7 +70,7 @@
 
 <script>
   import Home from "./views/Home.vue";
-  import { mapState, mapActions } from "vuex";
+  import { mapState } from "vuex";
 
   export default {
     name: "App",
@@ -81,9 +81,7 @@
     computed: {
       ...mapState(["isLogin"]),
     },
-    methods: {
-      ...mapActions(["logout"]),
-    },
+    methods: {},
     components: { Home },
   };
 </script>
